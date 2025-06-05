@@ -20,8 +20,16 @@ public class Manga {
     private String foto;
     @Column(length = 500, nullable = true)
     private String descricao;
-    @Column(length = 200, nullable = false)
+    @Column(nullable = false)
     private int qtdCapitulos;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

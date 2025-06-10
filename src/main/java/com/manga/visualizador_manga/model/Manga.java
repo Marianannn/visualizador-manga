@@ -1,10 +1,15 @@
 package com.manga.visualizador_manga.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,7 +17,7 @@ import jakarta.persistence.Table;
 public class Manga {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
+    @Column(name = "mangaId")
     private Integer id;
     @Column(length = 200, nullable = false)
     private String nome;
@@ -20,8 +25,20 @@ public class Manga {
     private String foto;
     @Column(length = 500, nullable = true)
     private String descricao;
-    @Column(length = 200, nullable = false)
+    @Column(nullable = false)
     private int qtdCapitulos;
+    
+    @Column(length = 200, nullable = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Capitulo> capitulos;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -53,6 +70,14 @@ public class Manga {
 
     public void setQtdCapitulos(int qtdCapitulos) {
         this.qtdCapitulos = qtdCapitulos;
+    }
+
+    public List<Capitulo> getCapitulos() {
+        return capitulos;
+    }
+
+    public void setCapitulos(List<Capitulo> capitulos) {
+        this.capitulos = capitulos;
     }
 
     @Override

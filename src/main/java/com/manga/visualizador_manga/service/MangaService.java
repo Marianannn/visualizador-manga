@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.management.AttributeNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.manga.visualizador_manga.model.Manga;
@@ -52,11 +53,15 @@ public class MangaService {
     }
 
     public void deleteManga(Manga manga){
-        repository.delete(manga);
+        if(repository.existsByNome(manga.getNome())){
+            repository.delete(manga);
+        }
     }
 
-    public void deleteByIdManga(Integer id){
-        repository.deleteById(id);
+    public void deleteById(Integer id){
+        if(repository.existsById(id)){
+            repository.deleteById(id);
+        }
     }
 
     public List<Manga> findAll(){

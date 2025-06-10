@@ -45,7 +45,7 @@ public class MangaController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteManga(@PathVariable Integer id){
-        service.deleteByIdManga(id);
+        service.deleteById(id);
         return ResponseEntity.ok("manga com o id '" + id + "' foi deletado com sucesso!!!");
     }
 

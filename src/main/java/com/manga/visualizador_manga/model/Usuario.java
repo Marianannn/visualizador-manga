@@ -1,10 +1,19 @@
 package com.manga.visualizador_manga.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +25,9 @@ public class Usuario {
     private String email;
     @Column(length = 200, nullable = false)
     private String senha;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Manga> mangas;
+
 
     public Integer getId() {
         return id;
@@ -41,4 +53,19 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public List<Manga> getMangas() {
+        return mangas;
+    }
+    public void setMangas(List<Manga> mangas) {
+        this.mangas = mangas;
+    }
+    
+    @Override
+    public String toString() {
+        return "Usuario [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", mangas=" + mangas
+                + "]";
+    }
+
+    
 }

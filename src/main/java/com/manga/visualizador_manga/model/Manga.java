@@ -2,11 +2,14 @@ package com.manga.visualizador_manga.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,7 +27,9 @@ public class Manga {
     private String descricao;
     @Column(nullable = false)
     private int qtdCapitulos;
+    
     @Column(length = 200, nullable = true)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Capitulo> capitulos;
 
     public Integer getId() {
@@ -65,6 +70,14 @@ public class Manga {
 
     public void setQtdCapitulos(int qtdCapitulos) {
         this.qtdCapitulos = qtdCapitulos;
+    }
+
+    public List<Capitulo> getCapitulos() {
+        return capitulos;
+    }
+
+    public void setCapitulos(List<Capitulo> capitulos) {
+        this.capitulos = capitulos;
     }
 
     @Override
